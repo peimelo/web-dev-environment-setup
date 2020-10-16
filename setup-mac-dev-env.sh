@@ -6,41 +6,81 @@ echo "Execute Installation Script"
 read -r -p "Absolutely NO WARRANTIES or GUARANTEES are provided. Are you sure you want to continue? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
 then
-    echo "Installing brew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    echo "==> Checking if brew is installed"
+    which -s brew
+    if [[ $? != 0 ]] ; then
+    echo "==> Installing brew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    brew tap homebrew/cask
+    else
+    echo "Found brew"
+    fi
 
-    echo "Installing git"
+    echo "==> Installing git"
     brew install git
     brew upgrade git
 
-    echo "Installing GitHub Desktop"
+    echo "==> Installing GitHub Desktop"
     brew cask install github
-    brew cask upgrade github
+    brew upgrade --cask github
 
-    echo "Installing NodeJS"
+    echo "==> Installing NodeJS"
     brew install node@12
     brew upgrade node@12
 
-    echo "Installing Docker"
+    echo "==> Installing Docker"
     brew cask install docker
-    brew cask upgrade docker
+    brew upgrade --cask docker
 
-    echo "Installing AWS"
+    echo "==> Installing AWS"
     brew install awscli
-    brew upgrade awscli
+    brew upgrade --cask awscli
 
-    echo "Installing VS Code"
+    echo "==> Installing VS Code"
     brew cask install visual-studio-code
-    brew cask upgrade visual-studio-code
+    brew upgrade --cask visual-studio-code
+
+    echo "==> Installing ffmpeg"
+    brew install ffmpeg
+    brew upgrade ffmpeg
+
+    echo "==> Installing Heroku CLI"
+    brew tap heroku/brew && brew install heroku
+    brew upgrade heroku/brew/heroku
+
+    echo "==> Installing Services"
+    brew tap homebrew/services
+
+    echo "==> Installing MySQL"
+    brew install mysql
+    brew upgrade mysql
+
+    echo "==> Installing PostgreSQL"
+    brew install postgresql
+    brew upgrade postgresql
+
+    echo "==> Installing Rbenv"
+    brew install rbenv ruby-build
+    brew upgrade rbenv ruby-build
+
+    echo "==> Installing Yarn"
+    brew install yarn
+    brew upgrade yarn
 
     echo "Results:"
     echo "Verify installation of AWS, Docker, GitHub Desktop and VS Code manually."
+
     gitVersion=$(git --version)
     echo "git: $gitVersion"
+
     nodeVersion=$(node -v)
     echo "Node: $nodeVersion"
+
     npmVersion=$(npm -v)
     echo "npm: $npmVersion"
+
+    yarnVersion=$(yarn -v)
+    echo "yarn: $yarnVersion"
 else
     echo "Aborted."
 fi
@@ -50,7 +90,7 @@ fi
 # which -s brew
 # if [[ $? != 0 ]] ; then
 #   echo "Installing brew"
-#   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null
+#   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 # else
 #   echo "Found brew"
 # fi
