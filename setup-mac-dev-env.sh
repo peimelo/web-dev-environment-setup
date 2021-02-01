@@ -21,15 +21,15 @@ then
     brew upgrade git
 
     echo "==> Installing GitHub Desktop"
-    brew cask install github
+    brew install --cask github
     brew upgrade --cask github
 
     echo "==> Installing NodeJS"
-    brew install node@12
-    brew upgrade node@12
+    brew install node@14
+    brew upgrade node@14
 
     echo "==> Installing Docker"
-    brew cask install docker
+    brew install --cask docker
     brew upgrade --cask docker
 
     echo "==> Installing AWS"
@@ -37,7 +37,7 @@ then
     brew upgrade --cask awscli
 
     echo "==> Installing VS Code"
-    brew cask install visual-studio-code
+    brew install --cask visual-studio-code
     brew upgrade --cask visual-studio-code
 
     echo "==> Installing ffmpeg"
@@ -66,6 +66,18 @@ then
     echo "==> Installing Yarn"
     brew install yarn
     brew upgrade yarn
+
+    echo "==> Installing FiraCode"
+    brew tap homebrew/cask-fonts && brew install --cask font-fira-code
+    brew upgrade font-fira-code
+
+    echo "==> Installing Insomnia"
+    brew install —cask insomnia
+    brew upgrade insomnia
+
+    echo "==> Installing DBeaver"
+    brew install --cask dbeaver-community
+    brew upgrade dbeaver-community
 
     echo "Results:"
     echo "Verify installation of AWS, Docker, GitHub Desktop and VS Code manually."
